@@ -3,6 +3,7 @@ BEGIN PROGRAM
     DEFINE ClockSettings
         time_format = 24 or 12
         show_date = True or False
+        date_format = iso or dmy_slash or long_month
     END DEFINE
 
     FUNCTION GetCurrentDateTime
@@ -17,46 +18,63 @@ BEGIN PROGRAM
         ENDIF
     END FUNCTION
 
-    FUNCTION FormatDate(current_datetime)
-        RETURN date as YYYY-MM-DD
+    FUNCTION FormatDate(current_datetime, date_format)
+        IF date_format is iso THEN
+            RETURN date as YYYY-MM-DD
+        ELSE IF date_format is dmy_slash THEN
+            RETURN date as DD/MM/YYYY
+        ELSE
+            RETURN date as Month DD, YYYY
+        ENDIF
     END FUNCTION
 
-    FUNCTION BuildDisplayString(current_datetime, settings)
+    FUNCTION BuildDisplayParts(current_datetime, settings)
         SET time_text = CALL FormatTime(current_datetime, settings.time_format)
 
         IF settings.show_date is True THEN
-            RETURN CALL FormatDate(current_datetime) + " " + time_text
+            SET date_text = CALL FormatDate(current_datetime, settings.date_format)
+        ELSE
+            SET date_text = empty string
         ENDIF
 
-        RETURN time_text
+        RETURN time_text, date_text
     END FUNCTION
 
-    PROCEDURE RunConsoleClock(settings)
-        DISPLAY "=== Live Digital Clock ==="
-        DISPLAY "Press Ctrl + C to stop"
+    FUNCTION LoadSettings
+        READ settings.json from Local AppData if it exists
+        IF the file is valid THEN
+            RETURN stored ClockSettings
+        ENDIF
 
-        TRY
-            WHILE True
-                SET now = CALL GetCurrentDateTime
-                DISPLAY CALL BuildDisplayString(now, settings) on same console line
-                WAIT 1 second
-            END WHILE
-        EXCEPT KeyboardInterrupt
-            DISPLAY "Clock stopped. Goodbye!"
-        END TRY
+        RETURN default ClockSettings
+    END FUNCTION
+
+    PROCEDURE SaveSettings(settings)
+        WRITE settings to Local AppData as JSON
     END PROCEDURE
 
     PROCEDURE RunGuiClock
+        SET settings = CALL LoadSettings
         CREATE window
         CREATE menu with:
             File -> Exit
             Format -> 12-hour or 24-hour
+            Format -> Date Format presets
             View -> Show Date toggle
+        CREATE time label
+        CREATE date label below the time label
 
         EVERY 1 second
             SET now = CALL GetCurrentDateTime
-            UPDATE label with CALL BuildDisplayString(now, settings)
+            SET time_text, date_text = CALL BuildDisplayParts(now, settings)
+            UPDATE time label with time_text
+            UPDATE date label with date_text
         END EVERY
+
+        WHEN the user changes a menu option
+            UPDATE settings
+            CALL SaveSettings(settings)
+        END WHEN
     END PROCEDURE
 
 END PROGRAM

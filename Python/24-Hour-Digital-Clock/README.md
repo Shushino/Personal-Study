@@ -1,90 +1,99 @@
-# Digital Clock System
+# 24-Hour Digital Clock
 
-Author: Omowu George Omajuwa  
-Matric Number: 25/18097  
-Department: Software Engineering  
-Course: SEN 201
-
-This project started as a simple 24-hour console clock for a Software Engineering assignment. It has now been refactored into a maintainable Python project with a shared clock core, a console launcher, and a Tkinter GUI launcher.
+This is a small beginner Tkinter desktop clock project that updates every second and now runs as a GUI-only application.
 
 ## Features
 
 - Live local time updates every second
 - 24-hour mode by default
 - Optional 12-hour mode with AM/PM
-- Optional date display
-- Console and GUI front ends backed by the same logic
-- Standard-library-only implementation
+- Optional date display shown below the time
+- Three date display presets:
+  - `YYYY-MM-DD`
+  - `DD/MM/YYYY`
+  - `Month DD, YYYY`
+- Saved user preferences for time format, date visibility, and date format
+- Windows packaging support for a portable `.exe` folder build
 
 ## Project Structure
 
-- `24-Hour-Digital-Clock.py` - legacy console entrypoint kept for backward compatibility
-- `clock_gui.py` - GUI entrypoint
-- `clock_app/` - shared clock package
-- `tests/` - unit tests for formatting, console parsing, and GUI state handling
-- `24-Hour-Digital-Clock-Pseudocode.txt` - updated system pseudocode
-- `24-Hour-Digital-Clock-Flowchart.jpg` - original coursework flowchart kept as a historical asset
+- `24-Hour-Digital-Clock.py` - main GUI launcher
+- `clock_gui.py` - alternate GUI launcher
+- `clock_app/` - shared clock logic, GUI code, and settings persistence
+- `tests/` - unit tests for formatting, GUI state, and settings persistence
+- `build_exe.ps1` - PowerShell build script for the Windows `onedir` package
+- `24-Hour-Digital-Clock-Pseudocode.txt` - maintained pseudocode for the current design
+- `24-Hour-Digital-Clock-Flowchart.jpg` - an older flowchart image kept as a reference
 
-## Editable Flow
+## Menu Options
 
-```mermaid
-flowchart TD
-    A[Choose launcher] --> B[Console launcher]
-    A --> C[GUI launcher]
-    B --> D[Parse CLI flags]
-    C --> E[Create Tkinter window and menus]
-    D --> F[Build ClockSettings]
-    E --> F
-    F --> G[ClockController formats current local datetime]
-    G --> H[Render clock text]
-    H --> I[Refresh every second]
+- `File -> Exit`
+- `Format -> 12-hour / 24-hour`
+- `Format -> Date Format -> YYYY-MM-DD / DD/MM/YYYY / Month DD, YYYY`
+- `View -> Show Date`
+
+## Settings Persistence
+
+The app stores its last-used settings in:
+
+```text
+%LOCALAPPDATA%\24-Hour-Digital-Clock\settings.json
 ```
 
-The JPG flowchart remains in the repository for the original assignment record, but the Mermaid diagram above is now the maintained source of truth.
+If that file is missing or invalid, the app falls back to the default settings.
 
-## How to Run
+## Running From Source
 
-### Console
+From the project folder:
 
-Run the original entry script:
-
-```bash
-python 24-Hour-Digital-Clock.py
-```
-
-Optional flags:
-
-```bash
-python 24-Hour-Digital-Clock.py --format 12
-python 24-Hour-Digital-Clock.py --date
-python 24-Hour-Digital-Clock.py --format 12 --date
-```
-
-### GUI
-
-```bash
+```powershell
 python clock_gui.py
 ```
 
-Use the GUI menu bar to:
+Or use the main launcher:
 
-- Switch between 12-hour and 24-hour time
-- Toggle date display
-- Exit the application
+```powershell
+python 24-Hour-Digital-Clock.py
+```
+
+For a window-only launch on Windows without an attached console:
+
+```powershell
+pythonw 24-Hour-Digital-Clock.py
+```
+
+## Building The Portable EXE Folder
+
+Install PyInstaller once:
+
+```powershell
+python -m pip install pyinstaller
+```
+
+Run the build script from this folder:
+
+```powershell
+.\build_exe.ps1
+```
+
+The portable app folder will be created at:
+
+```text
+dist\24-Hour-Digital-Clock\
+```
+
+You can copy that entire folder into an asset folder or move it anywhere on a Windows machine.
 
 ## Testing
 
-Run the unit tests with:
+Run the test suite with:
 
-```bash
+```powershell
 python -m unittest discover -s tests -v
 ```
 
-## Maintenance Improvements
+## Notes
 
-- Moved formatting and settings into a shared importable package
-- Removed import-time execution from the legacy script
-- Replaced full-screen console clearing with in-place clock updates
-- Added GUI support without third-party dependencies
-- Added automated tests for the main behaviors
-- Fixed documentation commands and text encoding issues
+- The runtime app uses only the Python standard library.
+- PyInstaller is only needed when you want to create the Windows executable build.
+- This project is intentionally simple and beginner-friendly.

@@ -1,6 +1,6 @@
-"""Legacy console launcher retained for backward compatibility."""
+"""Launch the Tkinter digital clock GUI."""
 
-from clock_app.console import main
+from clock_app.gui import main
 
 
 if __name__ == "__main__":

@@ -1,24 +1,12 @@
-﻿# Timer Program
+# My Learning Journey in the World of Programming
 
-A simple C++ 24-hour digital timer built as a learning project.
+This repository collects personal practice projects, study exercises, and small experiments as I grow across different programming languages and problem-solving styles.
 
-## About
+## What You'll Find
 
-This program asks the user for an hour, minute, and second, then displays a running digital timer in `HH:MM:SS` style.
+- `C++/` contains native programming exercises and console-based projects.
+- `Python/` contains learning projects focused on scripting, application structure, and GUI work.
 
-## File
+## Purpose
 
-- `timer.cpp` contains the source code for the program.
-
-## Requirements
-
-- Windows
-- A C++ compiler such as MinGW g++ or MSVC
-- `windows.h`, which is provided by the Windows SDK and should not be added to the repository
-
-## Notes
-
-- The program uses `Sleep()` from `windows.h`.
-- Compiled files like `.exe` are not included in the repository.
-- To compile with MinGW g++, run: `g++ timer.cpp -o timer.exe`
-- To compile with MSVC, run: `cl timer.cpp`
+This repo is a record of steady improvement: building fundamentals, trying new ideas, and turning small exercises into cleaner, more maintainable projects over time.

@@ -5,6 +5,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 
+DEFAULT_DATE_FORMAT = "iso"
+DATE_FORMAT_PATTERNS = {
+    "iso": "%Y-%m-%d",
+    "dmy_slash": "%d/%m/%Y",
+    "long_month": "%B %d, %Y",
+}
+
 
 def _validate_time_format(time_format: int) -> int:
     if time_format not in (12, 24):
@@ -12,16 +19,26 @@ def _validate_time_format(time_format: int) -> int:
     return time_format
 
 
+def _validate_date_format(date_format: str) -> str:
+    if date_format not in DATE_FORMAT_PATTERNS:
+        raise ValueError(
+            "date_format must be one of: iso, dmy_slash, long_month"
+        )
+    return date_format
+
+
 @dataclass(slots=True)
 class ClockSettings:
-    """Configuration shared by the console and GUI clocks."""
+    """Configuration shared by the clock application."""
 
     time_format: int = 24
     show_date: bool = False
+    date_format: str = DEFAULT_DATE_FORMAT
 
     def __post_init__(self) -> None:
         self.time_format = _validate_time_format(self.time_format)
         self.show_date = bool(self.show_date)
+        self.date_format = _validate_date_format(self.date_format)
 
 
 def get_current_datetime() -> datetime:
@@ -39,19 +56,29 @@ def format_time(current_time: datetime, time_format: int = 24) -> str:
     return current_time.strftime("%I:%M:%S %p")
 
 
-def format_date(current_time: datetime) -> str:
-    """Format a datetime into an ISO-like calendar date."""
+def format_date(current_time: datetime, date_format: str = DEFAULT_DATE_FORMAT) -> str:
+    """Format a datetime into one of the supported calendar date styles."""
 
-    return current_time.strftime("%Y-%m-%d")
+    normalized_format = _validate_date_format(date_format)
+    return current_time.strftime(DATE_FORMAT_PATTERNS[normalized_format])
+
+
+def build_display_parts(current_time: datetime, settings: ClockSettings) -> tuple[str, str]:
+    """Build the display strings for the current settings."""
+
+    time_text = format_time(current_time, settings.time_format)
+    if not settings.show_date:
+        return time_text, ""
+    return time_text, format_date(current_time, settings.date_format)
 
 
 def build_display_string(current_time: datetime, settings: ClockSettings) -> str:
     """Build the full display text for the current settings."""
 
-    time_text = format_time(current_time, settings.time_format)
-    if not settings.show_date:
+    time_text, date_text = build_display_parts(current_time, settings)
+    if not date_text:
         return time_text
-    return f"{format_date(current_time)} {time_text}"
+    return f"{time_text}\n{date_text}"
 
 
 class ClockController:
@@ -66,9 +93,18 @@ class ClockController:
     def set_show_date(self, show_date: bool) -> None:
         self.settings.show_date = bool(show_date)
 
+    def set_date_format(self, date_format: str) -> None:
+        self.settings.date_format = _validate_date_format(date_format)
+
     def toggle_show_date(self) -> bool:
         self.settings.show_date = not self.settings.show_date
         return self.settings.show_date
+
+    def get_display_parts(
+        self, current_time: datetime | None = None
+    ) -> tuple[str, str]:
+        moment = current_time or get_current_datetime()
+        return build_display_parts(moment, self.settings)
 
     def get_display_text(self, current_time: datetime | None = None) -> str:
         moment = current_time or get_current_datetime()
