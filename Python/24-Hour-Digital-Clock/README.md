@@ -1,36 +1,55 @@
-# 24-Hour Digital Clock
+# 24-Hour Clock App
 
-This is a small beginner Tkinter desktop clock project that updates every second and now runs as a GUI-only application.
+This is a small beginner-friendly Tkinter clock project that can switch between digital and analogue views while keeping the app fully desktop-based.
 
 ## Features
 
-- Live local time updates every second
-- 24-hour mode by default
-- Optional 12-hour mode with AM/PM
-- Optional date display shown below the time
+- Digital and analogue clock modes
+- 24-hour mode by default for the digital view
+- Optional 12-hour digital mode with AM/PM
+- Optional date display shown below the active clock view
 - Three date display presets:
   - `YYYY-MM-DD`
   - `DD/MM/YYYY`
   - `Month DD, YYYY`
-- Saved user preferences for time format, date visibility, and date format
+- Timezone selection with common presets and typed IANA names like `Africa/Lagos`
+- `Show Seconds` toggle for digital text and the analogue second hand
+- Multiple alarms with daily or one-time repeat behavior
+- Saved settings for display mode, timezone, alarms, and formatting choices
 - Windows packaging support for a portable `.exe` folder build
 
 ## Project Structure
 
 - `24-Hour-Digital-Clock.py` - main GUI launcher
 - `clock_gui.py` - alternate GUI launcher
-- `clock_app/` - shared clock logic, GUI code, and settings persistence
-- `tests/` - unit tests for formatting, GUI state, and settings persistence
+- `clock_app/` - shared clock logic, GUI code, analogue rendering, alarms, and settings persistence
+- `tests/` - unit tests for core formatting, GUI state, alarms, and storage behavior
 - `build_exe.ps1` - PowerShell build script for the Windows `onedir` package
 - `24-Hour-Digital-Clock-Pseudocode.txt` - maintained pseudocode for the current design
 - `24-Hour-Digital-Clock-Flowchart.jpg` - an older flowchart image kept as a reference
 
-## Menu Options
+## Controls
+
+### Menu Bar
 
 - `File -> Exit`
 - `Format -> 12-hour / 24-hour`
 - `Format -> Date Format -> YYYY-MM-DD / DD/MM/YYYY / Month DD, YYYY`
 - `View -> Show Date`
+
+### Settings Panel
+
+- Switch between digital and analogue clock mode
+- Choose a timezone from common presets or type a valid IANA timezone
+- Toggle `Show Seconds`
+- Add, edit, delete, enable, and disable alarms
+
+## Alarm Notes
+
+- Alarm times use `HH:MM`
+- Daily alarms stay active until you disable or delete them
+- One-time alarms fire on the next matching occurrence and then turn themselves off
+- Alarm notifications use a popup window plus a system beep
 
 ## Settings Persistence
 
@@ -40,7 +59,7 @@ The app stores its last-used settings in:
 %LOCALAPPDATA%\24-Hour-Digital-Clock\settings.json
 ```
 
-If that file is missing or invalid, the app falls back to the default settings.
+If the settings file is missing or contains invalid values, the app falls back to safe defaults.
 
 ## Running From Source
 
@@ -82,7 +101,7 @@ The portable app folder will be created at:
 dist\24-Hour-Digital-Clock\
 ```
 
-You can copy that entire folder into an asset folder or move it anywhere on a Windows machine.
+You can copy that whole folder into an asset folder or move it anywhere on a Windows machine.
 
 ## Testing
 
@@ -95,5 +114,6 @@ python -m unittest discover -s tests -v
 ## Notes
 
 - The runtime app uses only the Python standard library.
+- Time format changes affect the digital view; the analogue face stays analogue-only.
 - PyInstaller is only needed when you want to create the Windows executable build.
 - This project is intentionally simple and beginner-friendly.

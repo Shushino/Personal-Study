@@ -1,4 +1,4 @@
-"""Launch the Tkinter digital clock GUI."""
+"""Launch the Tkinter clock application GUI."""
 
 from clock_app.gui import main
 

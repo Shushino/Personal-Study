@@ -1,27 +1,47 @@
 BEGIN PROGRAM
 
+    DEFINE AlarmConfig
+        hour = 0 to 23
+        minute = 0 to 59
+        label = optional text
+        repeat_mode = daily or once
+        enabled = True or False
+    END DEFINE
+
     DEFINE ClockSettings
         time_format = 24 or 12
         show_date = True or False
         date_format = iso or dmy_slash or long_month
+        display_mode = digital or analogue
+        show_seconds = True or False
+        timezone_name = Local or valid IANA timezone
+        alarms = list of AlarmConfig
     END DEFINE
 
-    FUNCTION GetCurrentDateTime
-        RETURN current local system date and time
+    FUNCTION GetCurrentDateTime(timezone_name)
+        RETURN current system date and time in the selected timezone
     END FUNCTION
 
-    FUNCTION FormatTime(current_datetime, time_format)
-        IF time_format is 24 THEN
-            RETURN time as HH:MM:SS
+    FUNCTION FormatTime(current_datetime, settings)
+        IF settings.time_format is 24 THEN
+            IF settings.show_seconds is True THEN
+                RETURN time as HH:MM:SS
+            ELSE
+                RETURN time as HH:MM
+            ENDIF
         ELSE
-            RETURN time as HH:MM:SS AM/PM
+            IF settings.show_seconds is True THEN
+                RETURN time as HH:MM:SS AM/PM
+            ELSE
+                RETURN time as HH:MM AM/PM
+            ENDIF
         ENDIF
     END FUNCTION
 
-    FUNCTION FormatDate(current_datetime, date_format)
-        IF date_format is iso THEN
+    FUNCTION FormatDate(current_datetime, settings)
+        IF settings.date_format is iso THEN
             RETURN date as YYYY-MM-DD
-        ELSE IF date_format is dmy_slash THEN
+        ELSE IF settings.date_format is dmy_slash THEN
             RETURN date as DD/MM/YYYY
         ELSE
             RETURN date as Month DD, YYYY
@@ -29,15 +49,38 @@ BEGIN PROGRAM
     END FUNCTION
 
     FUNCTION BuildDisplayParts(current_datetime, settings)
-        SET time_text = CALL FormatTime(current_datetime, settings.time_format)
+        SET time_text = CALL FormatTime(current_datetime, settings)
 
         IF settings.show_date is True THEN
-            SET date_text = CALL FormatDate(current_datetime, settings.date_format)
+            SET date_text = CALL FormatDate(current_datetime, settings)
         ELSE
             SET date_text = empty string
         ENDIF
 
         RETURN time_text, date_text
+    END FUNCTION
+
+    FUNCTION BuildAnalogueClockData(current_datetime, settings)
+        CALCULATE hour hand angle
+        CALCULATE minute hand angle
+
+        IF settings.show_seconds is True THEN
+            CALCULATE second hand angle
+        ENDIF
+
+        RETURN analogue clock data
+    END FUNCTION
+
+    FUNCTION CheckAlarms(current_datetime, settings)
+        FOR EACH alarm in settings.alarms
+            IF alarm is enabled AND alarm time matches current hour and minute THEN
+                FIRE alarm event once for that minute
+
+                IF alarm.repeat_mode is once THEN
+                    DISABLE alarm
+                ENDIF
+            ENDIF
+        END FOR
     END FUNCTION
 
     FUNCTION LoadSettings
@@ -61,17 +104,34 @@ BEGIN PROGRAM
             Format -> 12-hour or 24-hour
             Format -> Date Format presets
             View -> Show Date toggle
-        CREATE time label
-        CREATE date label below the time label
+
+        CREATE top display area
+        CREATE digital time label
+        CREATE analogue canvas
+        CREATE date label below the active clock view
+
+        CREATE settings panel with:
+            Display mode selector
+            Timezone selector
+            Show Seconds toggle
+            Alarm list and alarm buttons
 
         EVERY 1 second
-            SET now = CALL GetCurrentDateTime
+            SET now = CALL GetCurrentDateTime(settings.timezone_name)
             SET time_text, date_text = CALL BuildDisplayParts(now, settings)
-            UPDATE time label with time_text
+
+            IF settings.display_mode is digital THEN
+                UPDATE digital label with time_text
+            ELSE
+                SET analogue_data = CALL BuildAnalogueClockData(now, settings)
+                DRAW analogue clock using analogue_data
+            ENDIF
+
             UPDATE date label with date_text
+            CALL CheckAlarms(now, settings)
         END EVERY
 
-        WHEN the user changes a menu option
+        WHEN the user changes a setting or alarm
             UPDATE settings
             CALL SaveSettings(settings)
         END WHEN
