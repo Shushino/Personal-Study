@@ -1,0 +1,62 @@
+BEGIN PROGRAM
+
+    DEFINE ClockSettings
+        time_format = 24 or 12
+        show_date = True or False
+    END DEFINE
+
+    FUNCTION GetCurrentDateTime
+        RETURN current local system date and time
+    END FUNCTION
+
+    FUNCTION FormatTime(current_datetime, time_format)
+        IF time_format is 24 THEN
+            RETURN time as HH:MM:SS
+        ELSE
+            RETURN time as HH:MM:SS AM/PM
+        ENDIF
+    END FUNCTION
+
+    FUNCTION FormatDate(current_datetime)
+        RETURN date as YYYY-MM-DD
+    END FUNCTION
+
+    FUNCTION BuildDisplayString(current_datetime, settings)
+        SET time_text = CALL FormatTime(current_datetime, settings.time_format)
+
+        IF settings.show_date is True THEN
+            RETURN CALL FormatDate(current_datetime) + " " + time_text
+        ENDIF
+
+        RETURN time_text
+    END FUNCTION
+
+    PROCEDURE RunConsoleClock(settings)
+        DISPLAY "=== Live Digital Clock ==="
+        DISPLAY "Press Ctrl + C to stop"
+
+        TRY
+            WHILE True
+                SET now = CALL GetCurrentDateTime
+                DISPLAY CALL BuildDisplayString(now, settings) on same console line
+                WAIT 1 second
+            END WHILE
+        EXCEPT KeyboardInterrupt
+            DISPLAY "Clock stopped. Goodbye!"
+        END TRY
+    END PROCEDURE
+
+    PROCEDURE RunGuiClock
+        CREATE window
+        CREATE menu with:
+            File -> Exit
+            Format -> 12-hour or 24-hour
+            View -> Show Date toggle
+
+        EVERY 1 second
+            SET now = CALL GetCurrentDateTime
+            UPDATE label with CALL BuildDisplayString(now, settings)
+        END EVERY
+    END PROCEDURE
+
+END PROGRAM
