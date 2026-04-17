@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 
 from .core import (
@@ -22,15 +23,22 @@ APP_DIRECTORY_NAME = "24-Hour-Digital-Clock"
 SETTINGS_FILE_NAME = "settings.json"
 
 
-def _default_local_appdata() -> Path:
+def _default_windows_appdata() -> Path:
     return Path.home() / "AppData" / "Local"
+
+
+def _default_settings_directory() -> Path:
+    if sys.platform == "win32":
+        return Path(os.environ.get("LOCALAPPDATA", _default_windows_appdata()))
+    if sys.platform == "darwin":
+        return Path.home() / "Library" / "Application Support"
+    return Path.home() / ".local" / "share"
 
 
 def get_settings_path() -> Path:
     """Return the path where GUI settings are stored."""
 
-    base_directory = Path(os.environ.get("LOCALAPPDATA", _default_local_appdata()))
-    return base_directory / APP_DIRECTORY_NAME / SETTINGS_FILE_NAME
+    return _default_settings_directory() / APP_DIRECTORY_NAME / SETTINGS_FILE_NAME
 
 
 def _load_alarm(raw_alarm: object) -> AlarmConfig | None:

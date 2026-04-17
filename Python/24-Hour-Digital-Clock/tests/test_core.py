@@ -106,7 +106,7 @@ class ClockControllerTests(unittest.TestCase):
         self.assertEqual(controller.settings.time_format, 12)
         self.assertTrue(controller.settings.show_date)
         self.assertEqual(controller.settings.date_format, "dmy_slash")
-        self.assertTrue(controller.settings.display_mode, "analogue")
+        self.assertEqual(controller.settings.display_mode, "analogue")
         self.assertEqual(rendered, "09:08 PM\n16/04/2026")
 
     def test_clock_controller_rejects_invalid_timezone(self) -> None:

@@ -84,7 +84,7 @@ BEGIN PROGRAM
     END FUNCTION
 
     FUNCTION LoadSettings
-        READ settings.json from Local AppData if it exists
+        READ settings.json from a platform-appropriate local settings directory if it exists
         IF the file is valid THEN
             RETURN stored ClockSettings
         ENDIF
@@ -93,7 +93,7 @@ BEGIN PROGRAM
     END FUNCTION
 
     PROCEDURE SaveSettings(settings)
-        WRITE settings to Local AppData as JSON
+        WRITE settings to a platform-appropriate local settings directory as JSON
     END PROCEDURE
 
     PROCEDURE RunGuiClock

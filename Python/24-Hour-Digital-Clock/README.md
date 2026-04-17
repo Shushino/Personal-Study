@@ -53,15 +53,17 @@ This is a small beginner-friendly Tkinter clock project that can switch between 
 
 ## Settings Persistence
 
-The app stores its last-used settings in:
+The app stores its last-used settings in a platform-appropriate local settings directory:
 
-```text
-%LOCALAPPDATA%\24-Hour-Digital-Clock\settings.json
-```
+- Windows: `%LOCALAPPDATA%\24-Hour-Digital-Clock\settings.json`
+- macOS: `~/Library/Application Support/24-Hour-Digital-Clock/settings.json`
+- Linux: `~/.local/share/24-Hour-Digital-Clock/settings.json`
 
 If the settings file is missing or contains invalid values, the app falls back to safe defaults.
 
 ## Running From Source
+
+This project requires Python 3.10 or later.
 
 From the project folder:
 
@@ -73,6 +75,18 @@ Or use the main launcher:
 
 ```powershell
 python 24-Hour-Digital-Clock.py
+```
+
+On macOS or Linux, use the same commands with the Python interpreter available on your system:
+
+```bash
+python3 clock_gui.py
+```
+
+You can also launch the package as a module from the project folder:
+
+```bash
+python3 -m clock_app
 ```
 
 For a window-only launch on Windows without an attached console:

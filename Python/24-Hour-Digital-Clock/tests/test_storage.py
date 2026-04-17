@@ -63,7 +63,7 @@ class ClockStorageTests(unittest.TestCase):
                         '"repeat_mode": "daily", "enabled": true}, '
                         '{"hour": "oops", "minute": 10, "label": 1, '
                         '"repeat_mode": "daily", "enabled": true}'
-                        ']}'
+                        "]}"
                     ),
                     encoding="utf-8",
                 )
@@ -83,6 +83,24 @@ class ClockStorageTests(unittest.TestCase):
         self.assertEqual(
             settings_path,
             Path(temp_dir) / "24-Hour-Digital-Clock" / "settings.json",
+        )
+
+    def test_get_settings_path_uses_unix_data_directory_when_not_windows(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch("clock_app.storage.sys.platform", "linux"), patch(
+                "pathlib.Path.home", return_value=Path(temp_dir)
+            ):
+                settings_path = get_settings_path()
+
+        self.assertEqual(
+            settings_path,
+            Path(temp_dir)
+            / ".local"
+            / "share"
+            / "24-Hour-Digital-Clock"
+            / "settings.json",
         )
 
 

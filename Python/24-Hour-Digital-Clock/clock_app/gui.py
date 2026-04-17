@@ -913,3 +913,7 @@ def main() -> int:
     ClockGuiApp(root)
     root.mainloop()
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

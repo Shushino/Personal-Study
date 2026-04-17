@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "24-hour-digital-clock"
+version = "0.1.0"
+description = "A simple Tkinter-based 24-hour clock with alarms and timezone support."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tzdata",
+]
+
+[project.urls]
+Homepage = "https://example.com"
+
+[project.scripts]
+"24-hour-digital-clock" = "clock_app.gui:main"

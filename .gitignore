@@ -11,8 +11,14 @@
 Debug/
 Release/
 build/
+dist/
 x64/
 x86/
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
 
 .vs/
 .vscode/
