@@ -117,6 +117,30 @@ dist\24-Hour-Digital-Clock\
 
 You can copy that whole folder into an asset folder or move it anywhere on a Windows machine.
 
+## Building On macOS / Linux
+
+This repository also includes a Unix-friendly build script.
+
+Install PyInstaller if needed:
+
+```bash
+python3 -m pip install --user pyinstaller
+```
+
+Run the build script from this folder:
+
+```bash
+./build_exe.sh
+```
+
+The portable app folder will be created at:
+
+```text
+dist/24-Hour-Digital-Clock/
+```
+
+Note: `build_exe.sh` and `build_exe.ps1` each produce a platform-specific output. A Windows `.exe` bundle is useful if you want to distribute to users who do not have Python installed, but it is not required for macOS or Linux deployments.
+
 ## Testing
 
 Run the test suite with:
