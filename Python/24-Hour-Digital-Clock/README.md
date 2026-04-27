@@ -16,7 +16,7 @@ This is a small beginner-friendly Tkinter clock project that can switch between 
 - `Show Seconds` toggle for digital text and the analogue second hand
 - Multiple alarms with daily or one-time repeat behavior
 - Saved settings for display mode, timezone, alarms, and formatting choices
-- Windows packaging support for a portable `.exe` folder build
+- Windows packaging support for a portable `.exe` folder build or a single-file `.exe`
 
 ## Project Structure
 
@@ -24,7 +24,8 @@ This is a small beginner-friendly Tkinter clock project that can switch between 
 - `clock_gui.py` - alternate GUI launcher
 - `clock_app/` - shared clock logic, GUI code, analogue rendering, alarms, and settings persistence
 - `tests/` - unit tests for core formatting, GUI state, alarms, and storage behavior
-- `build_exe.ps1` - PowerShell build script for the Windows `onedir` package
+- `build_exe.ps1` - PowerShell build script for Windows packaging
+- `build_exe.cmd` - Command Prompt friendly wrapper for the PowerShell build script
 - `24-Hour-Digital-Clock-Pseudocode.txt` - maintained pseudocode for the current design
 - `24-Hour-Digital-Clock-Flowchart.jpg` - an older flowchart image kept as a reference
 
@@ -100,13 +101,19 @@ pythonw 24-Hour-Digital-Clock.py
 Install PyInstaller once:
 
 ```powershell
-python -m pip install pyinstaller
+"C:\Path\To\Python\python.exe" -m pip install pyinstaller
 ```
 
 Run the build script from this folder:
 
 ```powershell
 .\build_exe.ps1
+```
+
+If PowerShell blocks local scripts on your machine, use the wrapper instead:
+
+```cmd
+build_exe.cmd
 ```
 
 The portable app folder will be created at:
@@ -116,6 +123,24 @@ dist\24-Hour-Digital-Clock\
 ```
 
 You can copy that whole folder into an asset folder or move it anywhere on a Windows machine.
+
+To produce a single-file `.exe` instead:
+
+```powershell
+.\build_exe.ps1 -OneFile
+```
+
+Or from Command Prompt:
+
+```cmd
+build_exe.cmd -OneFile
+```
+
+That output will be created at:
+
+```text
+dist\24-Hour-Digital-Clock.exe
+```
 
 ## Building On macOS / Linux
 
@@ -154,4 +179,5 @@ python -m unittest discover -s tests -v
 - The runtime app uses only the Python standard library.
 - Time format changes affect the digital view; the analogue face stays analogue-only.
 - PyInstaller is only needed when you want to create the Windows executable build.
+- The script ignores the Microsoft Store `python.exe` alias and looks for a real Python interpreter on your PATH.
 - This project is intentionally simple and beginner-friendly.
