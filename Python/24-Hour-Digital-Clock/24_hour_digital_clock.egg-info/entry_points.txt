@@ -1,0 +1,2 @@
+[console_scripts]
+24-hour-digital-clock = clock_app.gui:main

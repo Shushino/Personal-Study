@@ -1,0 +1,92 @@
+Metadata-Version: 2.4
+Name: 24-hour-digital-clock
+Version: 0.1.0
+Summary: A simple Tkinter-based 24-hour clock with alarms and timezone support.
+Project-URL: Homepage, https://example.com
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: Pillow
+Requires-Dist: pystray
+Requires-Dist: tzdata
+
+# 24-Hour Digital Clock
+
+A Python + Tkinter desktop clock focused on always-visible time tools: digital and analogue displays, alarms, stopwatch, countdown timer, world clock, compact HUD mode, screensaver mode, and system tray support.
+
+## Features
+
+- Digital and analogue clock display modes.
+- 12-hour and 24-hour time formats.
+- Optional date display with selectable date formats.
+- Timezone selection using IANA timezone names.
+- World clock list with live offsets.
+- Alarm management with repeat modes:
+  - Once
+  - Daily
+  - Weekdays
+  - Weekends
+  - Custom weekdays
+- Alarm popups with snooze support.
+- Stopwatch with lap tracking, split display, clipboard export, and text export.
+- Countdown timer with presets and completion notifications.
+- Pomodoro mode with automatic phase cycling.
+- Configurable timer/alarm sounds (`System Beep` or custom `.wav` on Windows).
+- Compact HUD mode with corner pinning and monitor selection.
+- Fullscreen screensaver with drift animation and optional color cycling.
+- System tray minimize/open/quit workflow.
+- Theme selection (`dark`, `light`, `system`).
+- Always-on-top toggle.
+- Persistent settings and runtime session data.
+
+## Screenshots
+
+<!-- Add screenshots here -->
+
+## Installation
+
+### End Users
+
+Download the latest `.exe` from [Releases](https://github.com/your-org/24-hour-digital-clock/releases).
+
+### Developers
+
+```powershell
+pip install -e .
+python -m clock_app
+```
+
+## Build
+
+### Windows
+
+```powershell
+./build_exe.ps1
+```
+
+### macOS / Linux
+
+```bash
+./build_exe.sh
+```
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+Tab` | Next tab |
+| `Ctrl+Shift+Tab` | Previous tab |
+| `Ctrl+N` | Add alarm |
+| `Ctrl+M` | Toggle compact mode |
+| `Ctrl+Shift+T` | Minimize to tray |
+| `F11` | Start/exit screensaver |
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Add or update tests with your changes.
+4. Open a pull request with a clear summary.
+
+## License
+
+No explicit license file is currently included in this repository. Add a `LICENSE` file before redistribution.
