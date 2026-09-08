@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Demo</title>
+    <style>
+        #continue {
+            padding: 10px 20px;
+            background: gray;
+            color: white;
+            border: none;
+            cursor: not-allowed;
+            pointer-events: none;
+            /* disable hover/click */
+        }
+
+        #continue.active {
+            background: green;
+            cursor: pointer;
+            pointer-events: auto;
+            /* enable hover/click */
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Countdown with Button Unlock</h2>
+    <p id="timer">5</p>
+    <button id="continue">Continue</button>
+
+    <script>
+        let timeLeft = 5;
+        const timerEl = document.getElementById("timer");
+        const btn = document.getElementById("continue");
+
+        // Normal countdown
+        const interval = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                btn.classList.add("active");
+                btn.textContent = "Continue (active)";
+            }
+        }, 1000);
+
+        // Visibility-aware countdown
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden") {
+                clearInterval(interval); // pause when tab is inactive
+                console.log("Timer paused because tab is hidden");
+            } else {
+                console.log("Tab active again — restart timer manually");
+                // You could restart the countdown logic here
+            }
+        });
+    </script>
+</body>
+
+</html>
