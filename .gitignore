@@ -12,6 +12,13 @@ Desktop.ini
 .env
 .env.*
 !.env.example
+*.log
+
+# Local Python environments
+.venv/
+venv/
+env/
+ENV/
 
 # Python bytecode and tooling caches
 __pycache__/
@@ -33,3 +40,29 @@ dist/
 # PyInstaller
 *.spec
 
+# JavaScript and Node tooling
+node_modules/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.parcel-cache/
+.vite/
+.next/
+coverage/
+
+# Native build output
+*.o
+*.obj
+*.out
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.pdb
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json

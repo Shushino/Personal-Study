@@ -1,0 +1,15 @@
+# Native build output
+*.o
+*.obj
+*.out
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.pdb
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
