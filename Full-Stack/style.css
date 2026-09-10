@@ -1,16 +1,24 @@
 body{
     color: #E99D4F;
-    background-image: url("nasa.webp");
-    background-size: cover; 
-}
-        
-.center{
     text-align: center;
     font-family: "Orbitron", sans-serif;
+    margin: 0;
+}
+        
+#center{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    background-image: url("nasa.webp");
+    background-size: cover; 
+    padding: 10px 0 40px 0;
 }
+
+#title{
+    font-size: 50px;
+    text-shadow: 0px 0px 4px black,;
+}
+
 .button{
     background-color: #BFBFC2;
     border: none;
