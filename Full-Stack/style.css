@@ -1,66 +1,25 @@
 body {
-    font-family: 'Happy Monkey', cursive;
     margin: 0;
-    padding: 0;
-    background-color: #a2d2ff;
     text-align: center;
-    color: #ffffff;
 }
 
-#profile-img {
-	width: 150px;
-	height: 150px;
-	object-fit: cover;
-	border-radius: 50%;
-	border: 6px solid #efb0c9;
-}
- 
-h1, h2, h4, p{
-    text-shadow: 0px 0px 1px black;
-}
-
-#age, #date{
-    background: #efb0c9;
-    padding: 3px 5px;
-    border-radius: 6.25%;
-    margin: 5px 0 10px 0;
-
-}
-
-#date{
-    margin: 0;
-}
-
-#header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.gift-section{
-    margin-top: 50px;
-}
-
-.gift-title{
-    margin-bottom: 10px;
-}
-
-.gift-hint{
-    margin-top: 0px;
-}
-
-.gift-img{
+.hero {
+    width: 100%;
+    max-width: 720px;
+    height: 343px;
     margin: 0 auto;
-    background-image: url("gift.jpg");
+    padding-top: 10px;
+    background-image: url("hero.jpg");
     background-size: cover;
-    height: 400px;
-    width: 400px;
-    border: 6px solid white;
-    border-radius: 10px;
+    color: white;
 }
 
-.gift-img:hover{
-    background-image: url("happy.gif");
-    background-size: cover;
+.hero-text {
+    width: fit-content;
+    max-width: 90%;
+    margin: 0 auto 20px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    background-color: black;
+    
 }
