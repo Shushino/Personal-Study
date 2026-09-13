@@ -8,8 +8,11 @@ body {
     max-width: 720px;
     height: 343px;
     margin: 0 auto;
-    padding-top: 10px;
-    background-image: url("hero.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("hero.png");
     background-size: cover;
     color: white;
 }
@@ -20,6 +23,21 @@ body {
     margin: 0 auto 20px;
     padding: 5px 15px;
     border-radius: 25px;
-    background-color: black;
+}
+
+#hero1{
+    background-color: #1D3557;
+}
+
+#hero2{
+    background-color: #457B9D;
+}
+
+.activities{
     
+}
+.activities-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
 }
