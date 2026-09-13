@@ -1,6 +1,8 @@
 body {
     margin: 0;
     text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    background: linear-gradient(to bottom, #1F3553, #405B7E);
 }
 
 .hero {
@@ -68,4 +70,43 @@ body {
     flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.guide-section {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1px 0;
+    box-sizing: border-box;
+    background: white;
+}
+
+.guide {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 90%;
+    max-width: 360px;
+    margin: 32px auto 40px;
+    padding: 16px;
+    box-sizing: border-box;
+    background: #A8DADC;
+    color: #1D3557;
+    border-radius: 6px;
+}
+
+.guide-img {
+    width: 150px;
+    height: auto;
+    border-radius: 6px;
+}
+
+.guide-text {
+    flex: 1;
+}
+
+.guide-text h2,
+.guide-text p,
+.guide-text h4 {
+    margin: 8px 0;
 }
