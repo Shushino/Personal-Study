@@ -1,112 +1,43 @@
 body {
-    margin: 0;
-    text-align: center;
-    font-family: "Times New Roman", Times, serif;
-    background: linear-gradient(to bottom, #1F3553, #405B7E);
+	background-image: url("station.jpg");
+	background-size: cover;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
+	font-weight: bold;
+	text-align: center;
 }
 
-.hero {
-    width: 100%;
-    max-width: 720px;
-    height: 343px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url("hero.png");
-    background-size: cover;
-    color: white;
+.counter {
+	max-width: 420px;
+	margin: 0 auto;
+	padding: 24px;
 }
 
-.hero-text {
-    width: fit-content;
-    max-width: 90%;
-    margin: 0 auto 20px;
-    padding: 5px 15px;
-    border-radius: 25px;
+h1 {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-#hero1{
-    background-color: #1D3557;
+h2 {
+	font-size: 50px;
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 
-#hero2{
-    background-color: #457B9D;
+button {
+	border: none;
+	padding: 10px 20px;
+	color: white;
+	font-weight: bold;
+	width: 200px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
-.activities{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    box-sizing: border-box;
-    width: 100%;
-    height: 378px;
-    margin: 0 auto;
-    max-width: 720px;
-    padding: 16px 24px;
-    background: #F1FAEE;
-    color: #1D3557;
-}
-#activities-title {
-    flex-basis: 100%;
-    font-size: 20px;
-    font-weight: bold;
-}
-#activities-title p {
-    margin: 8px 0;
-}
-.activity {
-    flex: 1;
-    align-self: flex-start;
-    text-align: center;
-}
-.activities-img{
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
+#increment-btn {
+	background: darkred;
 }
 
-.guide-section {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 1px 0;
-    box-sizing: border-box;
-    background: white;
-}
-
-.guide {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: 90%;
-    max-width: 360px;
-    margin: 32px auto 40px;
-    padding: 16px;
-    box-sizing: border-box;
-    background: #A8DADC;
-    color: #1D3557;
-    border-radius: 6px;
-}
-
-.guide-img {
-    width: 150px;
-    height: auto;
-    border-radius: 6px;
-}
-
-.guide-text {
-    flex: 1;
-}
-
-.guide-text h2,
-.guide-text p,
-.guide-text h4 {
-    margin: 8px 0;
+#save-btn {
+	background: darkgreen;
 }

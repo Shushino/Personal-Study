@@ -3,44 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>End of HTML and CSS courses</title>
+        <title>Passenger Counter</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <div class="hero">
-        <h1 class="hero-text" id="hero1">Visit my dream world!</h1>
-        <h3 class="hero-text" id="hero2">A world where my ideas and thoughts are free to roam</h3>
-    </div>
-
-    <div class="activities">
-        <div id="activities-title"><p>Top 3 things on my mind...</p></div>
-        <div class="activity">
-            <img class="activities-img" src="first.jpg" alt="">
-            <h2>Music is my life</h2>
-            <h4>Like indie.</h4>
-        </div>
-        <div class="activity">
-            <img class="activities-img" src="middle.jpg" alt="">
-            <h2>Light Novels, Manga and stuff</h2>
-            <h4>Like Slice-of-Life/Psycological stuffs.</h4>
-        </div>
-        <div class="activity">
-            <img class="activities-img" src="last.jpg" alt="">
-            <h2>And, uh, that's about it?</h2>
-            <h4>Ion know what else to add... Yeah, my life's that boring. 🙃</h4>
-        </div>
-    </div>
-
-    <div class="guide-section">
-        <div class="guide">
-            <img class="guide-img" src="shushino.jpg" alt="The Shushino logo">
-            <div class="guide-text">
-                <h2>Your guide</h2>
-                <p>Shushino is a colourful place for creativity, art and new ideas. Take a look around and enjoy the view.</p>
-                <h4>By Shushino</h4>
-            </div>
-        </div>
-    </div>
-
+        <main class="counter">
+            <h1>People entered:</h1>
+            <h2 id="count-el">0</h2>
+            <button id="increment-btn" onclick="increment()" type="button">INCREMENT</button>
+            <button id="save-btn" type="button">SAVE</button>
+            <p id="save-el">Previous entries: </p>
+        </main>
+        <script src="index.js"></script>
     </body>
 </html>

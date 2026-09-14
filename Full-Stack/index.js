@@ -1,11 +1,9 @@
-// space, scary, military, romantic, cowboy, fantasy, superhero
-favouriteMovieGenre("fantasy")
+let incre = 0
 
-// watermelon, tomato, banana, orange, avocado, blueberry
-favouriteFruit("blueberry")
-
-// light, dark
-favouriteMode("dark")
-
-// sharp, soft, round
-favouriteEdgeStyle("soft")
+function increment()
+{
+    document.getElementById("count-el")
+    incre = count-el
+    incre += 1
+    
+}
