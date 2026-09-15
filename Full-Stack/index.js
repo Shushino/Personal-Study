@@ -1,9 +1,12 @@
-let incre = 0
+let count = 0
 
 function increment()
 {
-    document.getElementById("count-el")
-    incre = count-el
-    incre += 1
-    
+    count += 1
+    document.getElementById("count-el").innerText = count
+}
+
+function save()
+{
+    document.getElementById("count-el").innerText = 0
 }
