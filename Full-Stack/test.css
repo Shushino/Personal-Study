@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #1b244a;
+    font-family: Arial, sans-serif;
+}
+
+.scoreboard {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    text-align: center;
+    color: white;
+}
+
+.team {
+    flex: 1;
+}
+
+h1 {
+    margin: 0 0 16px;
+    font-size: 2rem;
+}
+
+.score {
+    margin: 0 0 20px;
+    padding: 10px 20px;
+    background: #080001;
+    color: #f94f6d;
+    font-family: monospace;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+button {
+    margin: 4px;
+    padding: 8px 12px;
+    border: 1px solid #9aabd8;
+    border-radius: 4px;
+    background: transparent;
+    color: #9aabd8;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #9aabd8;
+    color: #1b244a;
+}
+
+@media (max-width: 500px) {
+    .scoreboard {
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .score {
+        font-size: 2.5rem;
+    }
+}

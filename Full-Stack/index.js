@@ -1,16 +1,8 @@
-let count = 0
-let SaveEl =document.getElementById("save-el") 
-function increment()
-{
-    count += 1
-    document.getElementById("count-el").innerText = count
-}
+let age = 22
 
-function save()
-{
-    let countStr = count + " - "
-    SaveEl.textContent += countStr
-    count = 0
-    document.getElementById("count-el").innerText = count
-    
+if (age < 21){
+    console.log("You can not enter the club!")
+}
+else{
+    console.log("Welcome!")
 }

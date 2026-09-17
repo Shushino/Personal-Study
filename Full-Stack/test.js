@@ -1,26 +1,12 @@
-let num1 = 8
-let num2 = 2
-document.getElementById("num1-el").textContent = num1
-document.getElementById("num2-el").textContent = num2
+let homeScore = 0
+let guestScore = 0
 
-function add()
-{
-    let sum = num1 + num2
-    document.getElementById("sum-el").textContent = "Sum: " + sum
-}
-function sub()
-{
-    let sum = num1 - num2
-    document.getElementById("sum-el").textContent = "Sum: " + sum
-}
-function div()
-{
-    let sum = num1 / num2
-    document.getElementById("sum-el").textContent = "Sum: " + sum
-}
-function mul()
-{
-    let sum = num1 * num2
-    document.getElementById("sum-el").textContent = "Sum: " + sum
+function addHomePoints(points) {
+    homeScore += points
+    document.getElementById("home-score").textContent = homeScore
 }
 
+function addGuestPoints(points) {
+    guestScore += points
+    document.getElementById("guest-score").textContent = guestScore
+}

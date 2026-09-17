@@ -1,17 +1,32 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <span id="num1-el"></span>
-        <span id="num2-el"></span>
-        <br>
-        <button onclick="add()">Add</button>
-        <button onclick="sub()">Subtract</button>
-        <button onclick="div()">Divide</button>
-        <button onclick="mul()">Multiply</button>
-        <br>
-        <span id="sum-el">Sum: </span>
-        <script src="test.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+    <main class="scoreboard">
+        <section class="team">
+            <h1>HOME</h1>
+            <p id="home-score" class="score">0</p>
+
+            <button onclick="addHomePoints(1)">+1</button>
+            <button onclick="addHomePoints(2)">+2</button>
+            <button onclick="addHomePoints(3)">+3</button>
+        </section>
+
+        <section class="team">
+            <h1>GUEST</h1>
+            <p id="guest-score" class="score">0</p>
+
+            <button onclick="addGuestPoints(1)">+1</button>
+            <button onclick="addGuestPoints(2)">+2</button>
+            <button onclick="addGuestPoints(3)">+3</button>
+        </section>
+    </main>
+
+    <script src="test.js"></script>
+</body>
 </html>
