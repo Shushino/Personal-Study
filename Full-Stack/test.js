@@ -11,16 +11,22 @@
 //     document.getElementById("guest-score").textContent = guestScore
 // }
 
-let age = 2026
 
-if (age <= 5) {
-    console.log("Free!")
-} else if (age >= 6 && age < 17) {
-    console.log("Child Discount")
-} else if (age >= 18 && age < 26) {
-    console.log("Student discount")
-} else if (age >= 27 && age < 66) {
-    console.log("Full price")
-} else {
-    console.log("Senior Citizen discount")
+
+
+const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=<>?";
+
+function generatePassword() {
+    let password = "";
+    for (let i = 0; i < 15; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters[randomIndex];
+    }
+    return password;
 }
+
+const firstPassword = generatePassword();
+const secondPassword = generatePassword();
+
+console.log("First password:", firstPassword);
+console.log("Second password:", secondPassword);
