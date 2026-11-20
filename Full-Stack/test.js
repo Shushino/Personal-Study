@@ -14,19 +14,11 @@
 
 
 
-const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=<>?";
+const recipient = "James"
+const sender = "George"
 
-function generatePassword() {
-    let password = "";
-    for (let i = 0; i < 15; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        password += characters[randomIndex];
-    }
-    return password;
-}
+const email = `Hey ${recipient}! 
+How is it going? 
+Cheers ${sender}`
 
-const firstPassword = generatePassword();
-const secondPassword = generatePassword();
-
-console.log("First password:", firstPassword);
-console.log("Second password:", secondPassword);
+console.log(email)
