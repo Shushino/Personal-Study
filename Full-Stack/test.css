@@ -1,64 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
+    min-height: 100vh;
     margin: 0;
-    padding: 40px 20px;
-    background: #1b244a;
-    font-family: Arial, sans-serif;
-}
-
-.scoreboard {
-    max-width: 700px;
-    margin: 0 auto;
+    padding: 32px 16px;
     display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    background: #f3f4f6;
+    color: #353535;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.converter {
+    width: min(100%, 380px);
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f4f4f4;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
+}
+
+.converter-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 22px 18px 20px;
+    background: #6943ff;
     color: white;
+    text-align: center;
 }
 
-.team {
-    flex: 1;
+.converter-header h1 {
+    margin: 0 0 18px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
-h1 {
-    margin: 0 0 16px;
-    font-size: 2rem;
-}
-
-.score {
-    margin: 0 0 20px;
-    padding: 10px 20px;
-    background: #080001;
-    color: #f94f6d;
-    font-family: monospace;
-    font-size: 4rem;
-    font-weight: bold;
-}
-
-button {
-    margin: 4px;
-    padding: 8px 12px;
-    border: 1px solid #9aabd8;
-    border-radius: 4px;
+#input-el {
+    width: 88px;
+    padding: 3px 6px;
+    border: 1px solid #b295ff;
+    border-radius: 5px;
     background: transparent;
-    color: #9aabd8;
+    color: white;
+    font: inherit;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#input-el:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+#btn {
+    margin-top: 14px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 4px;
+    background: white;
+    color: #3d3d3d;
+    font: inherit;
     cursor: pointer;
 }
 
-button:hover {
-    background: #9aabd8;
-    color: #1b244a;
+#btn:hover {
+    background: #eee9ff;
 }
 
-@media (max-width: 500px) {
-    .scoreboard {
-        gap: 10px;
+#btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+.conversion-results {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+}
+
+.conversion-card {
+    min-height: 82px;
+    padding: 16px 10px;
+    background: white;
+    text-align: center;
+}
+
+.conversion-card h2 {
+    margin: 0 0 10px;
+    color: #5a537b;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.conversion-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+@media (max-width: 360px) {
+    .conversion-results {
+        padding: 14px;
     }
 
-    h1 {
-        font-size: 1.4rem;
-    }
-
-    .score {
-        font-size: 2.5rem;
+    .conversion-card p {
+        font-size: 12px;
     }
 }

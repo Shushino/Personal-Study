@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scoreboard</title>
+    <title>Converter</title>
     <link rel="stylesheet" href="test.css">
 </head>
 <body>
-    <main class="scoreboard">
-        <section class="team">
-            <h1>HOME</h1>
-            <p id="home-score" class="score">0</p>
+    <main class="converter">
+        <header class="converter-header">
+            <h1>Metric/Imperial Unit Conversion</h1>
+            <label class="visually-hidden" for="input-el">Value to convert</label>
+            <input id="input-el" type="number" step="any" value="20">
+            <button id="btn" type="button">Convert</button>
+        </header>
 
-            <button onclick="addHomePoints(1)">+1</button>
-            <button onclick="addHomePoints(2)">+2</button>
-            <button onclick="addHomePoints(3)">+3</button>
-        </section>
-
-        <section class="team">
-            <h1>GUEST</h1>
-            <p id="guest-score" class="score">0</p>
-
-            <button onclick="addGuestPoints(1)">+1</button>
-            <button onclick="addGuestPoints(2)">+2</button>
-            <button onclick="addGuestPoints(3)">+3</button>
+        <section class="conversion-results" aria-live="polite">
+            <article class="conversion-card">
+                <h2>Length (Meters/Feet)</h2>
+                <p id="length"></p>
+            </article>
+            <article class="conversion-card">
+                <h2>Volume (Liters/Gallons)</h2>
+                <p id="volume"></p>
+            </article>
+            <article class="conversion-card">
+                <h2>Mass (Kilograms/Pounds)</h2>
+                <p id="mass"></p>
+            </article>
         </section>
     </main>
 

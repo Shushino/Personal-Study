@@ -1,24 +1,27 @@
-// let homeScore = 0
-// let guestScore = 0
+const inputEl = document.getElementById("input-el");
+const convertButton = document.getElementById("btn");
+const lengthResult = document.getElementById("length");
+const volumeResult = document.getElementById("volume");
+const massResult = document.getElementById("mass");
 
-// function addHomePoints(points) {
-//     homeScore += points
-//     document.getElementById("home-score").textContent = homeScore
-// }
+convertButton.addEventListener("click", function() {
+    const inputValue = inputEl.valueAsNumber;
+    if (!Number.isFinite(inputValue)) {
+        alert("Please enter a valid number.");
+        return;
+    }
 
-// function addGuestPoints(points) {
-//     guestScore += points
-//     document.getElementById("guest-score").textContent = guestScore
-// }
+    const metersToFeet = inputValue * 3.2808;
+    const feetToMeters = inputValue * 0.3048;
+    const litersToGallons = inputValue * 0.2642;
+    const gallonsToLiters = inputValue * 3.7854;
+    const kilogramsToPounds = inputValue * 2.2046;
+    const poundsToKilograms = inputValue * 0.4536;
 
-
-
-
-const recipient = "James"
-const sender = "George"
-
-const email = `Hey ${recipient}! 
-How is it going? 
-Cheers ${sender}`
-
-console.log(email)
+    lengthResult.textContent =
+        `${inputValue} meters = ${metersToFeet.toFixed(3)} feet | ${inputValue} feet = ${feetToMeters.toFixed(3)} meters`;
+    volumeResult.textContent =
+        `${inputValue} liters = ${litersToGallons.toFixed(3)} gallons | ${inputValue} gallons = ${gallonsToLiters.toFixed(3)} liters`;
+    massResult.textContent =
+        `${inputValue} kilos = ${kilogramsToPounds.toFixed(3)} pounds | ${inputValue} pounds = ${poundsToKilograms.toFixed(3)} kilos`;
+});
