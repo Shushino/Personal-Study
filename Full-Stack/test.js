@@ -1,27 +1,56 @@
-const inputEl = document.getElementById("input-el");
-const convertButton = document.getElementById("btn");
-const lengthResult = document.getElementById("length");
-const volumeResult = document.getElementById("volume");
-const massResult = document.getElementById("mass");
+const stockNameEl = document.getElementById("stock-name")
+const stockSymbolEl = document.getElementById("stock-symbol")
+const stockPriceEl = document.getElementById("stock-price")
+const stockTimeEl = document.getElementById("stock-time")
+const priceTrendEl = document.getElementById("price-trend")
 
-convertButton.addEventListener("click", function() {
-    const inputValue = inputEl.valueAsNumber;
-    if (!Number.isFinite(inputValue)) {
-        alert("Please enter a valid number.");
-        return;
+let currentPriceInCents = 99
+let previousPrice = null
+let hasGeneratedInitialPrice = false
+
+function getFreshStockData() {
+    if (hasGeneratedInitialPrice) {
+        const changeInCents = Math.floor(Math.random() * 5) - 2
+        currentPriceInCents = Math.max(1, currentPriceInCents + changeInCents)
+    } else {
+        hasGeneratedInitialPrice = true
     }
 
-    const metersToFeet = inputValue * 3.2808;
-    const feetToMeters = inputValue * 0.3048;
-    const litersToGallons = inputValue * 0.2642;
-    const gallonsToLiters = inputValue * 3.7854;
-    const kilogramsToPounds = inputValue * 2.2046;
-    const poundsToKilograms = inputValue * 0.4536;
+    return {
+        name: "QtechAI",
+        symbol: "QTA",
+        price: currentPriceInCents / 100,
+        time: new Date()
+    }
+}
 
-    lengthResult.textContent =
-        `${inputValue} meters = ${metersToFeet.toFixed(3)} feet | ${inputValue} feet = ${feetToMeters.toFixed(3)} meters`;
-    volumeResult.textContent =
-        `${inputValue} liters = ${litersToGallons.toFixed(3)} gallons | ${inputValue} gallons = ${gallonsToLiters.toFixed(3)} liters`;
-    massResult.textContent =
-        `${inputValue} kilos = ${kilogramsToPounds.toFixed(3)} pounds | ${inputValue} pounds = ${poundsToKilograms.toFixed(3)} kilos`;
-});
+function renderStockTicker(stock) {
+    stockNameEl.textContent = stock.name
+    stockSymbolEl.textContent = stock.symbol
+    stockPriceEl.textContent = `$${stock.price.toFixed(2)}`
+    stockTimeEl.dateTime = stock.time.toISOString()
+    stockTimeEl.textContent = stock.time.toLocaleTimeString()
+
+    if (previousPrice === null || stock.price === previousPrice) {
+        priceTrendEl.textContent = "▶"
+        priceTrendEl.className = "price-trend unchanged"
+        priceTrendEl.setAttribute("aria-label", "No change")
+    } else if (stock.price > previousPrice) {
+        priceTrendEl.textContent = "▲"
+        priceTrendEl.className = "price-trend up"
+        priceTrendEl.setAttribute("aria-label", "Price increased")
+    } else {
+        priceTrendEl.textContent = "▼"
+        priceTrendEl.className = "price-trend down"
+        priceTrendEl.setAttribute("aria-label", "Price decreased")
+    }
+
+    previousPrice = stock.price
+}
+
+function updateStockTicker() {
+    renderStockTicker(getFreshStockData())
+}
+
+updateStockTicker()
+setInterval(updateStockTicker, 1500)

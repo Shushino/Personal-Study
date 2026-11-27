@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Converter</title>
+    <title>Stock Ticker</title>
     <link rel="stylesheet" href="test.css">
+    <script src="test.js" defer></script>
 </head>
 <body>
-    <main class="converter">
-        <header class="converter-header">
-            <h1>Metric/Imperial Unit Conversion</h1>
-            <label class="visually-hidden" for="input-el">Value to convert</label>
-            <input id="input-el" type="number" step="any" value="20">
-            <button id="btn" type="button">Convert</button>
-        </header>
+    <main class="ticker">
+        <p class="eyebrow">Market simulation</p>
+        <h1>Stock Ticker</h1>
 
-        <section class="conversion-results" aria-live="polite">
-            <article class="conversion-card">
-                <h2>Length (Meters/Feet)</h2>
-                <p id="length"></p>
-            </article>
-            <article class="conversion-card">
-                <h2>Volume (Liters/Gallons)</h2>
-                <p id="volume"></p>
-            </article>
-            <article class="conversion-card">
-                <h2>Mass (Kilograms/Pounds)</h2>
-                <p id="mass"></p>
-            </article>
+        <section class="stock-card" aria-label="Stock information" aria-live="polite">
+            <dl>
+                <div class="stock-row">
+                    <dt>Name:</dt>
+                    <dd id="stock-name"></dd>
+                </div>
+                <div class="stock-row">
+                    <dt>Symbol:</dt>
+                    <dd id="stock-symbol"></dd>
+                </div>
+                <div class="stock-row">
+                    <dt>Price:</dt>
+                    <dd class="price">
+                        <span id="stock-price"></span>
+                        <span id="price-trend" class="price-trend" aria-label="No change">▶</span>
+                    </dd>
+                </div>
+                <div class="stock-row">
+                    <dt>Time:</dt>
+                    <dd><time id="stock-time"></time></dd>
+                </div>
+            </dl>
         </section>
-    </main>
 
-    <script src="test.js"></script>
+        <p class="update-note">Price refreshes every 1.5 seconds</p>
+    </main>
 </body>
 </html>

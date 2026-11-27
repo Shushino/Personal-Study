@@ -1,3 +1,7 @@
+import { interplanetaryDestinationsArr as destinations } from "./data.js"
+
+console.log(destinations)
+
 let myLeads = []
 
 const inputEl = document.getElementById("input-el")
